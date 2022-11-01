@@ -1,8 +1,6 @@
+require 'redcarpet/render_strip'
+
 module ApplicationHelper
-  require 'redcarpet/render_strip'
-
-
-
   def has_role?(role)
     current_user && current_user.has_role?(role)
   end
