@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ChannelsControllerTest < ActionDispatch::IntegrationTest
+class CommunitiesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @channel = channels(:one)
   end

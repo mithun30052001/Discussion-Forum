@@ -1,12 +1,12 @@
 class Discussion < ApplicationRecord
 
-  belongs_to :channel 
+  belongs_to :community 
   belongs_to :user
   has_many :replies, dependent: :destroy
   has_many :votes
 
   acts_as_paranoid  #Deleted posts will be saved for future use
-  validates :title, :contents,:channel, presence: true
+  validates :title, :contents,:community, presence: true
   # validates :title, length: {maximum: 20}
   resourcify
   

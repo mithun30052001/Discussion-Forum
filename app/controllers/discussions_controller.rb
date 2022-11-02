@@ -1,18 +1,18 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: %i[ show edit update destroy ]
-  before_action :find_channels, only: [:index, :show, :new, :edit]
+  before_action :find_communities, only: [:index, :show, :new, :edit]
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /discussions or /discussions.json
   def index
     @discussions = Discussion.order('created_at desc').limit(30)
-    @channels = Channel.page(params[:page]).per(5).order('channel asc')
+    @communities = Community.page(params[:page]).per(5).order('community asc')
   end
 
   # GET /discussions/1 or /discussions/1.json
   def show
     @discussions = Discussion.order('created_at desc').limit(30)
-    @channels = Channel.page(params[:page]).per(5).order('channel asc')
+    @communities = Community.page(params[:page]).per(5).order('community asc')
   end
 
    def archive
@@ -34,7 +34,7 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = current_user.discussions.new(discussion_params)
     @discussion.save
-    @channels = Channel.all.page(params[:page]).per(2)
+    @communities = Community.all.page(params[:page]).per(2)
     respond_to do |format|
       if @discussion.save
         format.html { redirect_to discussion_url(@discussion), notice: "Discussion was successfully created." }
@@ -75,13 +75,13 @@ class DiscussionsController < ApplicationController
       @discussion = Discussion.find(params[:id])
     end
 
-    def find_channels
-      @channels =Channel.all.order('created_at desc')
+    def find_communities
+      @communities =Community.all.order('created_at desc')
     end
 
     # Only allow a list of trusted parameters through.
     def discussion_params
-      params.require(:discussion).permit(:title, :content, :channel_id, :contents)
+      params.require(:discussion).permit(:title, :content, :community_id, :contents)
       # params.fetch(:discussion, {}).permit(:contents) 
     end
 end

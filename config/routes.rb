@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   
-  resources :channels
+  resources :communities
   resources :discussions do
     resources :replies
   end

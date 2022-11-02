@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 2022_10_20_054335) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "channels", force: :cascade do |t|
-    t.string "channel"
+  create_table "communities", force: :cascade do |t|
+    t.string "community"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "discussion_id"
@@ -64,9 +64,8 @@ ActiveRecord::Schema.define(version: 2022_10_20_054335) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.integer "channel_id"
+    t.integer "community_id"
     t.string "slug"
-    t.integer "total_likes_count"
     t.text "contents"
     t.integer "downvotes", default: 0
     t.integer "upvotes", default: 0
@@ -83,15 +82,6 @@ ActiveRecord::Schema.define(version: 2022_10_20_054335) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
-  end
-
-  create_table "likes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "discussion_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["discussion_id"], name: "index_likes_on_discussion_id"
-    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "replies", force: :cascade do |t|

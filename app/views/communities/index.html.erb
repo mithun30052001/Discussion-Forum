@@ -1,0 +1,39 @@
+<h1 class="title is-2">communities</h1>
+<% if has_role?(:admin) %>
+  <div class="level">
+    <div class="level-left"></div>
+    <div class="level-right">
+      <%= link_to 'New Community', new_community_path, class:'button is-dark' %>
+    </div>
+  </div>
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>Community</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @communities.each do |community| %>
+        <tr>
+          <td><%= link_to community.community, community %></td>
+          <td>
+            <div class="buttons is-right">
+              <%= link_to 'View Community', community, class:'button' %>
+              <%= link_to 'Edit Community', edit_community_path(community), class:'button' %>
+              <%= link_to 'Delete', community, class:'button is-danger', method: :delete, data: { confirm: "Are you sure you want to delete this community? " } %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="has-text-center">Sorry! You don't have access this page.</p>
+<% end %>
+<div class="apple_pagination">
+  <div class="page_info">
+    <%= page_entries_info @communities %>
+  </div>
+  <%= paginate @communities %>
+</div>
