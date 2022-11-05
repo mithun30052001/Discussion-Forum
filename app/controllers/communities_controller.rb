@@ -53,7 +53,7 @@ end
   end
 
   def community_values
-    params.require(:community).permit(:name, :url, :summary, :rules)
+    params.require(:community).permit(:name, :url, :summary, :rules, :profile_image, :cover_image)
   end
 
 end
