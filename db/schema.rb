@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_02_123460) do
-
+ActiveRecord::Schema[7.1].define(version: 2024_06_07_095319) do
   create_table "accounts", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -20,10 +19,10 @@ ActiveRecord::Schema.define(version: 2022_11_02_123460) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "karma", default: 0
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
@@ -34,8 +33,8 @@ ActiveRecord::Schema.define(version: 2022_11_02_123460) do
     t.text "body"
     t.string "record_type", null: false
     t.integer "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -44,7 +43,7 @@ ActiveRecord::Schema.define(version: 2022_11_02_123460) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -56,8 +55,8 @@ ActiveRecord::Schema.define(version: 2022_11_02_123460) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -71,8 +70,8 @@ ActiveRecord::Schema.define(version: 2022_11_02_123460) do
     t.integer "account_id"
     t.integer "post_id"
     t.text "message"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_comments_on_account_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
@@ -83,8 +82,8 @@ ActiveRecord::Schema.define(version: 2022_11_02_123460) do
     t.string "url"
     t.text "rules"
     t.integer "total_members"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "summary"
     t.index ["account_id"], name: "index_communities_on_account_id"
   end
@@ -97,8 +96,8 @@ ActiveRecord::Schema.define(version: 2022_11_02_123460) do
     t.integer "upvotes", default: 0
     t.integer "downvotes", default: 0
     t.integer "total_comments", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["community_id"], name: "index_posts_on_community_id"
   end
@@ -106,8 +105,8 @@ ActiveRecord::Schema.define(version: 2022_11_02_123460) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "account_id"
     t.integer "community_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_subscriptions_on_account_id"
     t.index ["community_id"], name: "index_subscriptions_on_community_id"
   end
@@ -116,8 +115,8 @@ ActiveRecord::Schema.define(version: 2022_11_02_123460) do
     t.integer "account_id"
     t.integer "post_id"
     t.boolean "upvote"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_votes_on_account_id"
     t.index ["post_id"], name: "index_votes_on_post_id"
   end
